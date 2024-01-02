@@ -1,31 +1,53 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs "Node"
-    }
-
-  
-
     stages {
-        stage('Clean and Install Dependencies') {
+        stage('Checkout') {
             steps {
-                bat 'npm cache clean --force'
-                bat 'npm install --force'
+                // Check out the source code from your version control system (e.g., Git)
+                // git 'https://github.com/your-username/your-reactjs-project.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                // Install Node.js and npm (Assuming you have Node.js and npm as dependencies)
+                // Use a version manager like nvm if needed
+                sh 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                bat 'npm run build'
+                // Build the ReactJS project
+                sh 'npm run build'
             }
         }
 
-        stage('Deploy in IIS') {
+        stage('Test') {
             steps {
-                // Copy files using xcopy in Windows
-                bat 'xcopy /Y C:\\Jaimin\\Text\\* C:\\Jaimin\\wwwroot\\TextUtils\\'
+                // Run tests if you have them
+                // sh 'npm test'
             }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Deploy the built ReactJS application
+                // This could involve copying files to a server or any deployment process you follow
+                // Example: rsync, SCP, etc.
+            }
+        }
+    }
+
+    post {
+        success {
+            // This block will be executed if the pipeline succeeds
+            echo 'Build and deployment successful!'
+        }
+        failure {
+            // This block will be executed if the pipeline fails
+            echo 'Build or deployment failed. Please check the logs for details.'
         }
     }
 }
