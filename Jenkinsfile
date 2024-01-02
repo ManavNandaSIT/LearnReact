@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Check out the source code from your version control system (e.g., Git)
-                // git 'https://github.com/your-username/your-reactjs-project.git'
+                git  'https://github.com/ManavNandaSIT/LearnReact'
             }
         }
 
