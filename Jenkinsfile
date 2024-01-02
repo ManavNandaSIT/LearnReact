@@ -5,10 +5,7 @@ pipeline {
         nodejs "Node"
     }
 
-    environment {
-        // Define the site name
-        iisSiteName = "TextUtils"
-    }
+  
 
     stages {
         stage('Clean and Install Dependencies') {
